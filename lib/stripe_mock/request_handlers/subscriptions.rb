@@ -76,7 +76,12 @@ module StripeMock
         end
 
         # expand the plan for addition to the customer object
-        plan_name = params[:plan] || subscription[:plan][:id]
+        if params[:plan].empty?
+          plan_name = subscription[:plan][:id]
+        else
+          plan_name = params[:plan]
+        end
+
         plan = plans[plan_name]
 
         if params[:coupon]
